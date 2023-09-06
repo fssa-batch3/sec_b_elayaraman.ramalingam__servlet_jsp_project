@@ -33,6 +33,7 @@ public class EditBusServlet extends HttpServlet {
             String departureTime = request.getParameter("departureTime");
             String arrivalTime = request.getParameter("arrivalTime");
             int capacity = Integer.parseInt(request.getParameter("capacity"));
+            int routeId = Integer.parseInt(request.getParameter("routeId"));
             boolean isAc = request.getParameter("isAc") != null;
             int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
 
@@ -41,6 +42,7 @@ public class EditBusServlet extends HttpServlet {
             bus.setId(busId);
             bus.setBusNo(busNo);
             bus.setDepartureTime(Time.valueOf(departureTime));
+            bus.setRouteId(routeId);
             bus.setArrivalTime(Time.valueOf(arrivalTime));
             bus.setCapacity(capacity);
             bus.setAc(isAc);
@@ -49,7 +51,7 @@ public class EditBusServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/admin/buses");
         } catch (ServicesException | NumberFormatException e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/admin/buses/edit?id=" + request.getParameter("busId") + "&error=true");
+            response.sendRedirect(request.getContextPath() + "/admin/buses/edit?id=" + request.getParameter("busId"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

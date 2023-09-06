@@ -16,6 +16,7 @@ public class DeleteBusServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             int busId = Integer.parseInt(request.getParameter("id"));
+
             request.setAttribute("busId", busId);
             request.getRequestDispatcher("/deleteBus.jsp").forward(request, response);
         }
@@ -27,6 +28,7 @@ public class DeleteBusServlet extends HttpServlet {
         try {
             services.switchBusStatus(busId);
         } catch (ServicesException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         response.sendRedirect(request.getContextPath() + "/admin/buses");

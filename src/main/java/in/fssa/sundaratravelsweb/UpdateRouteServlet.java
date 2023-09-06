@@ -17,23 +17,28 @@ public class UpdateRouteServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            RouteServices services = new RouteServices();
+
             int routeId = Integer.parseInt(request.getParameter("routeId"));
             String fromLocation = request.getParameter("fromLocation");
             String toLocation = request.getParameter("toLocation");
             BigDecimal basePrice = new BigDecimal(request.getParameter("basePrice"));
 
-            RouteServices services = new RouteServices();
+            Route testRoute = services.getRouteById(routeId);
+
             Route route = new Route();
             route.setRouteId(routeId);
             route.setFromLocation(fromLocation);
             route.setToLocation(toLocation);
             route.setBasePrice(basePrice);
 
-            services.updateRoutePrice(routeId,basePrice);
-
+            if (fromLocation.equals(testRoute.getFromLocation()) && toLocation.equals(testRoute.getToLocation())) {
+                services.updateRoutePrice(routeId, basePrice);
+            } else {
+                services.updateRoute(route);
+            }
             response.sendRedirect(request.getContextPath() + "/admin/routes");
         } catch (NumberFormatException | ServicesException e) {
-            // Handle invalid input or ServicesException
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/admin/routes");
         }
