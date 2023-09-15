@@ -84,6 +84,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/admin/buses">Buses</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/bookings">Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/tickets">Tickets</a>
+                </li>
             </ul>
         </div>
     </div>

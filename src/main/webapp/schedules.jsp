@@ -5,64 +5,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>List Schedules</title>
+    <title>Schedule List</title>
     <style>
-        * {
-            text-decoration: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        nav {
-            background-color: #333;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-        }
-
-        h1 {
-            margin: 20px 0;
-        }
-
-        a {
-            text-decoration: none;
-            color: #333;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            text-align: left;
-            width: fit-content;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
     </style>
 </head>
 <body>
@@ -71,10 +15,10 @@
 <header>
     <h1>Schedule List</h1>
     <a href="${pageContext.request.contextPath}/admin/schedules/create">
-        <button>Create New Schedule</button>
+        <button class="btn btn-info btn-sm">Create New Schedule</button>
     </a>
 </header>
-<table>
+<table class="table table-borderless container">
     <thead>
     <tr>
         <th>Schedule ID</th>
@@ -100,8 +44,8 @@
         <td><%= schedule.isSaturday() %></td>
         <td><%= schedule.isSunday() %></td>
         <td class="wrapper">
-            <a href="${pageContext.request.contextPath}/admin/schedules/edit?id=<%= schedule.getId() %>"><button>Edit</button></a>
-            <a href="${pageContext.request.contextPath}/admin/schedules/delete?id=<%= schedule.getId() %>"><button>Delete</button></a>
+            <a href="${pageContext.request.contextPath}/admin/schedules/edit?id=<%= schedule.getId() %>"><button class="btn btn-primary btn-sm">Edit</button></a>
+            <a href="${pageContext.request.contextPath}/admin/schedules/delete?id=<%= schedule.getId() %>" ><button class="btn btn-danger btn-sm">Delete</button></a>
         </td>
     </tr>
     <% } %>

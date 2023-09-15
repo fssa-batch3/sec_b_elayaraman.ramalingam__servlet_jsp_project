@@ -78,16 +78,16 @@
     <input type="time" id="arrivalTime" step="2" name="arrivalTime" value="${editBus.arrivalTime}" required>
 
     <label for="capacity">Capacity:</label>
-    <input type="number" id="capacity" name="capacity" value="${editBus.capacity}" required><br>
+    <input type="number" min="0" id="capacity" name="capacity" value="${editBus.capacity}" required><br>
 
     <label for="isAc">AC:</label>
     <input type="checkbox" id="isAc" name="isAc" ${editBus.isAc() ? 'checked' : ''}><br>
 
     <label for="routeId">Route ID:</label>
-    <input type="number" id="routeId" name="routeId" value="${editBus.routeId}" required><br>
+    <input type="number" min="0" id="routeId" name="routeId" value="${editBus.routeId}" required><br>
 
     <label for="scheduleId">Schedule ID:</label>
-    <input type="number" id="scheduleId" name="scheduleId" value="${editBus.scheduleId}" required><br>
+    <input type="number" min="0" id="scheduleId" name="scheduleId" value="${editBus.scheduleId}" required><br>
 
     <button type="submit">Update Bus</button>
 

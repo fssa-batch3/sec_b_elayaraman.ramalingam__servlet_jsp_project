@@ -4,39 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New Schedule</title>
+    <!-- Add Bootstrap CSS Link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
 
-<h1>Create New Schedule</h1>
-<form action="${pageContext.request.contextPath}/admin/schedules/create" method="post">
-    <label for="monday">Monday:</label>
-    <input type="checkbox" name="monday" id="monday" value="true"><br>
+<div class="container">
+    <h1>Create New Schedule</h1>
 
-    <label for="tuesday">Tuesday:</label>
-    <input type="checkbox" name="tuesday" id="tuesday" value="true"><br>
+    <form action="${pageContext.request.contextPath}/admin/schedules/create" method="post">
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="monday" id="monday" value="true">
+            <label class="form-check-label" for="monday">Monday</label>
+        </div>
 
-    <label for="wednesday">Wednesday:</label>
-    <input type="checkbox" name="wednesday" id="wednesday" value="true"><br>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="tuesday" id="tuesday" value="true">
+            <label class="form-check-label" for="tuesday">Tuesday</label>
+        </div>
 
-    <label for="thursday">Thursday:</label>
-    <input type="checkbox" name="thursday" id="thursday" value="true"><br>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="wednesday" id="wednesday" value="true">
+            <label class="form-check-label" for="wednesday">Wednesday</label>
+        </div>
 
-    <label for="friday">Friday:</label>
-    <input type="checkbox" name="friday" id="friday" value="true"><br>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="thursday" id="thursday" value="true">
+            <label class="form-check-label" for="thursday">Thursday</label>
+        </div>
 
-    <label for="saturday">Saturday:</label>
-    <input type="checkbox" name="saturday" id="saturday" value="true"><br>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="friday" id="friday" value="true">
+            <label class="form-check-label" for="friday">Friday</label>
+        </div>
 
-    <label for="sunday">Sunday:</label>
-    <input type="checkbox" name="sunday" id="sunday" value="true"><br>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="saturday" id="saturday" value="true">
+            <label class="form-check-label" for="saturday">Saturday</label>
+        </div>
 
-    <input type="submit" value="Create Schedule">
-</form>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="sunday" id="sunday" value="true">
+            <label class="form-check-label" for="sunday">Sunday</label>
+        </div>
 
-<% if (request.getAttribute("error") != null) { %>
-<p style="color: red;">${request.getAttribute("error")}</p>
-<% } %>
+        <button type="submit" class="btn btn-primary">Create Schedule</button>
+        <button type="button" id="cancelButton" class="btn btn-secondary">Cancel</button>
+
+    </form>
+
+    <% if (request.getAttribute("error") != null) { %>
+    <p style="color: red;">${request.getAttribute("error")}</p>
+    <% } %>
+</div>
+<script>
+    document.getElementById("cancelButton").addEventListener("click", function() {
+        window.location.href = "${pageContext.request.contextPath}/admin/schedules";
+    });
+</script>
+<!-- Add Bootstrap JS and Popper.js (required for some Bootstrap features) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@2.9.3/dist/umd/popper.min.js"></script>
 
 </body>
 </html>

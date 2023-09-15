@@ -22,7 +22,7 @@ public class DeleteRouteServlet extends HttpServlet {
         int routeId = Integer.parseInt(request.getParameter("routeId"));
         RouteServices services = new RouteServices();
         try {
-            services.deleteRoute(routeId);
+            services.switchRouteStatus(routeId);
             response.sendRedirect(request.getContextPath() + "/admin/routes");
         } catch (ServicesException e) {
             e.printStackTrace();

@@ -22,7 +22,7 @@ public class BusServlet extends HttpServlet {
         try {
             buses = busService.getAllBuses();
         } catch (ServicesException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
 
         request.setAttribute("buses", buses);

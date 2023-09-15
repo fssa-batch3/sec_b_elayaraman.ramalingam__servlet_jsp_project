@@ -7,6 +7,6 @@
 <body>
 <h1>Sundara Travels</h1>
 <br/>
-<a href="/sundaratravels_web_war_exploded/admin">admin dashboard</a>
+<a href="/sundaratravels-web/admin">admin dashboard</a>
 </body>
 </html>

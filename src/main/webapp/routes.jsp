@@ -42,9 +42,6 @@
         <td><%= route.getToLocation() %></td>
         <td><%= route.getBasePrice() %></td>
         <td>
-<%--            <a href="<%= request.getContextPath() %>/admin/routes/edit?id=<%= route.getRouteId() %>">--%>
-<%--                <button class="btn btn-primary btn-sm" onclick="window.location.href='<%= request.getContextPath() %>/admin/routes/edit?id=<%= route.getRouteId() '">Edit</button>--%>
-<%--            </a>--%>
     <button class="btn btn-primary btn-sm" onclick="window.location.href='<%= request.getContextPath() %>/admin/routes/edit?id=<%= route.getRouteId() %>'">Edit</button>
     <button class="btn btn-danger btn-sm" onclick="window.location.href='<%= request.getContextPath() %>/admin/routes/delete?id=<%= route.getRouteId() %>'">Delete</button>
 

@@ -12,9 +12,9 @@
 <h1>Edit Route</h1>
 <form action="${pageContext.request.contextPath}/admin/routes/update" method="post">
     <input type="hidden" name="routeId" value="${editRoute.routeId}">
-    From Location: <input type="text" name="fromLocation" value="${editRoute.fromLocation}" required ><br>
-    To Location: <input type="text" name="toLocation" value="${editRoute.toLocation}" required ><br>
-    Base Price: <input type="text" name="basePrice" value="${editRoute.basePrice}" required><br>
+    From Location: <input type="text" maxlength="100" name="fromLocation" value="${editRoute.fromLocation}" required ><br>
+    To Location: <input type="text" maxlength="100" name="toLocation" value="${editRoute.toLocation}" required ><br>
+    Base Price: <input type="text" min="0" name="basePrice" value="${editRoute.basePrice}" required><br>
     <input type="submit" value="Update">
 </form>
 

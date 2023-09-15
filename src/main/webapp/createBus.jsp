@@ -5,97 +5,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New Bus</title>
-    <style>
-        /* Your CSS styles for the page */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
-
-        h1 {
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="time"],
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type="checkbox"] {
-            margin-top: 5px;
-        }
-
-        button[type="submit"],
-        button {
-            background-color: #008bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        button[type="submit"]:hover,
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+
+</style>
 <body>
 <jsp:include page="navbar.jsp"/>
 
-<h1>Create New Bus</h1>
+<div class="container">
+    <h1>Create New Bus</h1>
 
-<form action="${pageContext.request.contextPath}/admin/buses/create" method="post">
-    <label for="busNo">Bus Number:</label>
-    <input type="text" id="busNo" name="busNo" required>
+    <form action="${pageContext.request.contextPath}/admin/buses/create" method="post">
+        <div class="mb-3">
+            <label for="busNo" class="form-label">Bus Number:</label>
+            <input type="text" class="form-control" id="busNo" name="busNo" required>
+        </div>
 
-    <label for="departureTime">Departure Time:</label>
-    <input type="time" id="departureTime" step="2"  name="departureTime" required>
+        <div class="mb-3">
+            <label for="departureTime" class="form-label">Departure Time:</label>
+            <input type="time" class="form-control" id="departureTime" step="2" name="departureTime" required>
+        </div>
 
-    <label for="arrivalTime">Arrival Time:</label>
-    <input type="time" id="arrivalTime" step="2"  name="arrivalTime" required>
+        <div class="mb-3">
+            <label for="arrivalTime" class="form-label">Arrival Time:</label>
+            <input type="time" class="form-control" id="arrivalTime" step="2" name="arrivalTime" required>
+        </div>
 
-    <label for="capacity">Capacity:</label>
-    <input type="number" id="capacity" name="capacity" required>
+        <div class="mb-3">
+            <label for="capacity" class="form-label">Capacity:</label>
+            <input type="number" min="0" class="form-control" id="capacity" name="capacity" required>
+        </div>
 
-    <label for="isAc">AC:</label>
-    <input type="checkbox" id="isAc" name="isAc">
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="isAc" name="isAc">
+            <label class="form-check-label" for="isAc">AC</label>
+        </div>
 
-    <label for="routeId">Route ID:</label>
-    <input type="number" id="routeId" name="routeId" required>
+        <div class="mb-3">
+            <label for="routeId" class="form-label">Route ID:</label>
+            <input type="number" min="0" class="form-control" id="routeId" name="routeId" required>
+        </div>
 
-    <label for="scheduleId">Schedule ID:</label>
-    <input type="number" id="scheduleId" name="scheduleId" required>
+        <div class="mb-3">
+            <label for="scheduleId" class="form-label">Schedule ID:</label>
+            <input type="number" min="0" class="form-control" id="scheduleId" name="scheduleId" required>
+        </div>
 
-    <button type="submit">Create Bus</button>
-    <button type="button" id="cancelButton">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create Bus</button>
+        <button type="button" id="cancelButton" class="btn btn-secondary">Cancel</button>
 
-</form>
-<script>
-    document.getElementById("cancelButton").addEventListener("click", function() {
-        window.location.href = "${pageContext.request.contextPath}/admin/buses";
-    });
-</script>
+    </form>
+
+    <script>
+        document.getElementById("cancelButton").addEventListener("click", function() {
+            window.location.href = "${pageContext.request.contextPath}/admin/buses";
+        });
+    </script>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js (required for some Bootstrap features) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@2.9.3/dist/umd/popper.min.js"></script>
 
 </body>
 </html>
