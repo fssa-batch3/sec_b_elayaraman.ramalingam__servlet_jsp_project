@@ -21,7 +21,7 @@
 		</select><br> <label for="toLocation">To Location:</label> <select
 			id="toLocation" name="toLocation" required onchange="selectRouteId()">
 			<option value="" disabled selected>Select To Location</option>
-		</select><br> <input type="hidden" id="selectedRouteId" /> <label for="travelDate">Travel
+		</select><br> <input name="routeId" type="hidden" id="selectedRouteId" /> <label for="travelDate">Travel
 			Date:</label> <input type="date" id="travelDate" name="travelDate" required><br>
 		<input type="submit" value="Search Buses">
 	</form>

@@ -20,9 +20,16 @@ import in.fssa.sundaratravels.service.BookingServices;
 import in.fssa.sundaratravels.service.BusServices;
 import in.fssa.sundaratravels.service.RouteServices;
 
-@WebServlet("/admin/buses/list")
-public class ListBusesServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet({ "/AvailableBusesServlet", "/bus/list" })
+public class AvailableBusesServlet extends HttpServlet {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
         	
         	BusServices busServices = new BusServices();
@@ -60,9 +67,10 @@ public class ListBusesServlet extends HttpServlet {
             	busList.add(dto);
             }
             request.setAttribute("busList", busList);
-            request.getRequestDispatcher("/busList.jsp").forward(request, response);
+            request.getRequestDispatcher("/listbuses.jsp").forward(request, response);
         } catch (NumberFormatException | ServicesException e) {
             e.printStackTrace();
         }
     }
+
 }
