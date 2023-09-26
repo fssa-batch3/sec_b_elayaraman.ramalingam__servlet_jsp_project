@@ -20,7 +20,11 @@ public class FindTicketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/findTicket.jsp").forward(request, response);
+		try {
+			request.getRequestDispatcher("/findTicket.jsp").forward(request, response);
+		}catch(Exception e) {
+			request.getRequestDispatcher("./404.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,8 +46,5 @@ public class FindTicketServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
-		
 	}
-
 }

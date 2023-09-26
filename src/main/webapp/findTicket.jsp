@@ -10,10 +10,10 @@
 </head>
 <body>
 <jsp:include page="GuestNavbar.jsp" />
-<div class="container">
+<div class="container" style="margin-top:80px">
 <div class="input-group d-flex justify-content-center mt-5 input-group" >
 <form class="d-flex input-grouprow g-3 needs-validation" novalidate style="width:auto" >
-  <input id="phonenumber" type="tel" class="form-control" placeholder="travel date" required>
+  <input id="phonenumber" type="tel" class="form-control" placeholder="Phone number" required>
   <input id="traveldate" type="date" class="form-control" required>
   </form>
   <button class="btn btn-primary" id="ticketButton">Find your ticket</button>

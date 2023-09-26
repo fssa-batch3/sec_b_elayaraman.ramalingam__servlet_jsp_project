@@ -19,7 +19,9 @@ import java.util.List;
 @WebServlet("/admin/bookings")
 public class BookingServlet extends HttpServlet {
 
-    protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+	private static final long serialVersionUID = 3674515115878591233L;
+
+	protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
         BookingServices services =  new BookingServices();
         List<Booking>  list = new ArrayList<>();
         try{
