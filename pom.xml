@@ -70,10 +70,18 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Jackson Core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.13.0</version> <!-- Use the latest version available -->
+		</dependency>
+
+		<!-- Jackson Databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.15.2</version>
+			<version>2.13.0</version> <!-- Use the latest version available -->
 		</dependency>
 
 	</dependencies>

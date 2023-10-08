@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,37 +9,51 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-<jsp:include page="GuestNavbar.jsp" />
-<div class="container" style="margin-top:80px">
-<div class="input-group d-flex justify-content-center mt-5 input-group" >
-<form class="d-flex input-grouprow g-3 needs-validation" novalidate style="width:auto" >
-  <input id="phonenumber" type="tel" class="form-control" placeholder="Phone number" required>
-  <input id="traveldate" type="date" class="form-control" required>
-  </form>
-  <button class="btn btn-primary" id="ticketButton">Find your ticket</button>
-</div>
-<div id="ticketList">
-</div>
-</div>
-<script>
+	<jsp:include page="GuestNavbar.jsp" />
+	<div class="container" style="margin-top: 80px">
+		<div
+			class="input-group d-flex mt-5 input-group justify-content-center">
+			<form class="d-flex input-grouprow g-3 needs-validation
+			justify-content-center"
+				onsubmit="fetchTicket(event)" novalidate style="width: 80%">
+				<div class="col-md-3">
+					 <input id="phonenumber" pattern="^[789]\d{9}$" type="tel"
+					class="form-control" placeholder="Phone number" required>
+					<div class="invalid-feedback">Please provide a valid phone
+				number.</div>
+				</div>
+				<div class="col-md-3">
+				
+				<input id="traveldate" type="date" class="form-control" required>
 
+				<div class="invalid-feedback">Enter a date</div>
+				</div>
+				
+				
+				<button class="btn btn-primary" id="ticketButton" type="submit">Find
+					your ticket</button>
+			</form>
+			
+		</div>
+		<div id="ticketList"></div>
+	</div>
+	<script>
+async function fetchTicket(event) {
+    event.preventDefault();
 
+    const phonenumber = document.getElementById("phonenumber").value;
+    const traveldate = document.getElementById("traveldate").value;
 
-document.getElementById("ticketButton").addEventListener('click',async()=>{
-	window.history.replaceState({}, document.title, window.location.href);
-	const phonenumber = document.getElementById("phonenumber").value;
-	const traveldate = document.getElementById("traveldate").value;
-	
-	if(!phonenumber || !traveldate){
-		return;
-	}
-	
-	const data = new FormData();
-	data.append("phonenumber",phonenumber);
-	data.append("traveldate",traveldate);
-	console.log(data);
-	const url = "<%= request.getContextPath() %>/ticket/find";
-	try {
+    if (!phonenumber || !traveldate) {
+        return;
+    }
+
+    const data = new FormData();
+    data.append("phonenumber", phonenumber);
+    data.append("traveldate", traveldate);
+    console.log(data);
+    const url = "<%=request.getContextPath()%>/ticket/find";
+    try {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -56,7 +70,7 @@ document.getElementById("ticketButton").addEventListener('click',async()=>{
     } catch (error) {
         console.error('Error:', error);
     }
-});
+}
 
 function listTickets(items) {
     const ticketListDiv = document.getElementById("ticketList");
@@ -91,8 +105,18 @@ function listTickets(items) {
     ticketListDiv.appendChild(table);
 }
 
+const forms = document.querySelectorAll('.needs-validation');
 
+Array.from(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
 
+        form.classList.add('was-validated');
+    });
+});
 </script>
 </body>
 </html>

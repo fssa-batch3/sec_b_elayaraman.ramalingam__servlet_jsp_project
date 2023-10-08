@@ -30,20 +30,17 @@ public class NewTicketServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Get form parameters
             int busId = Integer.parseInt(request.getParameter("busId"));
             Date travelDate = Date.valueOf(request.getParameter("travelDate"));
             int bookedSeats = Integer.parseInt(request.getParameter("bookedSeats"));
             String passengerName = request.getParameter("passengerName");
             long phoneNumber = Long.parseLong(request.getParameter("phoneNumber"));
+            int[] list = {};
 
-            // Call BookingServices to book the ticket
-            bookingServices.bookTicket(busId, travelDate, bookedSeats, passengerName, phoneNumber);
+            bookingServices.bookTicket(busId, travelDate, bookedSeats, passengerName, phoneNumber,list);
 
-            // Redirect to a success page or show a success message
             response.sendRedirect(request.getContextPath() + "/admin/tickets");
         } catch (ServicesException e) {
-            // Handle any service exception (e.g., validation errors)
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("/createTicket.jsp").forward(request, response);
         }
