@@ -24,7 +24,6 @@ public class DeleteScheduleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
         BusScheduleServices services = new BusScheduleServices();
-        System.out.println("jj");
         try {
             services.deleteBusSchedule(scheduleId);
         } catch (ServicesException e) {

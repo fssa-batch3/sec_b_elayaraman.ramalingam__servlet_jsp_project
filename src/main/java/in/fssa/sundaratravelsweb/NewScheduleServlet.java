@@ -14,7 +14,12 @@ import java.io.IOException;
 @WebServlet("/admin/schedules/create")
 public class NewScheduleServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3292806594253225465L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/newSchedule.jsp").forward(request, response);
     }
 

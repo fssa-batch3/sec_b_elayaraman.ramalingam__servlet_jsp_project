@@ -1,5 +1,3 @@
-check
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="in.fssa.sundaratravels.dto.*"%>
@@ -42,6 +40,36 @@ html, body {
 	align-items: center;
 	align-content: center;
 	flex-wrap: wrap;
+}
+div#checkboxContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 374px !important;
+}
+
+.holder {
+	display: flex;
+	border: 2px solid;
+	width: 50px;
+	height: 50px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	margin: 5px;
+	cursor:pointer;
+}
+
+.selected {
+    border-color: #007bff;
+    color: #007bff;
+    
+}
+
+.disabled {
+    opacity: 0.50;
+    pointer-events: none;
 }
 </style>
 <body>
@@ -156,113 +184,125 @@ html, body {
 
 	</div>
 	<script>
-  const seatsValue = document.querySelector('input[name="seats"]').value;
-  const cleanedSeatsValue = seatsValue.replace(/[{}]/g, ''); 
-  const seatPairs = cleanedSeatsValue.split(',');
+const seatsValue = document.querySelector('input[name="seats"]').value;
+const cleanedSeatsValue = seatsValue.replace(/[{}]/g, '');
+const seatPairs = cleanedSeatsValue.split(',');
 
-  const busDetails = {};
-  const selectedSeats = {};
+const busDetails = {};
+const selectedSeats = {};
 
-  seatPairs.forEach(seatPair => {
+seatPairs.forEach(seatPair => {
     const [seatNumber, seatStatus] = seatPair.split('=').map(item => item.trim());
     busDetails[parseInt(seatNumber)] = seatStatus === 'true';
-  });
-	
-  function updateSelectedSeats(seatNumber, isSelected) {
-	  if (isSelected) {
-	    selectedSeats[seatNumber] = true;
-	  } else {
-	    delete selectedSeats[seatNumber];
-	  }
-	  
-	  const selectedSeatsInput = document.getElementById('selectedSeats');
-	  selectedSeatsInput.value = JSON.stringify(selectedSeats);
-	    
-	  document.getElementById('seatCount').value = Object.keys(selectedSeats).length;
-	  
-	  const basePrice = parseFloat(document.getElementById('basePrice').value);
-	  
-	  const seatCount = parseInt(document.getElementById('seatCount').value);
-	  
-	  const finalPriceInput = document.getElementById('finalPrice');
-	  
-	  const finalPrice = basePrice * seatCount;
-	    finalPriceInput.value = finalPrice.toFixed(2);
-	    document.getElementById("amountToBePaid").value = finalPriceInput.value;
-	    
-	    console.log(basePrice);
-	    
-	    console.log(seatCount);
-	    
-	    console.log(finalPriceInput);
-	  console.log(selectedSeats); 
-	}
-  console.log(busDetails);
-  
-  const checkboxContainer = document.getElementById('checkboxContainer');
+});
 
-  for (const seatNumber in busDetails) {
-    if (busDetails.hasOwnProperty(seatNumber)) {
-      const label = document.createElement('div');
-      label.textContent = seatNumber;
-      label.classList.add("seat");
-      
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.name = seatNumber;
-      checkbox.value = seatNumber;
-      checkbox.checked = busDetails[seatNumber];
-      checkbox.disabled = busDetails[seatNumber];
-      checkbox.classList.add("btn");
-      
-      checkbox.addEventListener('click', function () {
-          updateSelectedSeats(seatNumber, this.checked);
-        });
-      
-      label.appendChild(checkbox);
-      checkboxContainer.appendChild(label);
+function updateSelectedSeats(seatNumber, isSelected) {
+    if (isSelected) {
+        selectedSeats[seatNumber] = true;
+    } else {
+        delete selectedSeats[seatNumber];
     }
-  }
 
-  document.addEventListener("DOMContentLoaded", function () {
+    const selectedSeatsInput = document.getElementById('selectedSeats');
+    selectedSeatsInput.value = JSON.stringify(selectedSeats);
+
+    document.getElementById('seatCount').value = Object.keys(selectedSeats).length;
+
+    const basePrice = parseFloat(document.getElementById('basePrice').value);
+
+    const seatCount = parseInt(document.getElementById('seatCount').value);
+
+    const finalPriceInput = document.getElementById('finalPrice');
+
+    const finalPrice = basePrice * seatCount;
+    finalPriceInput.value = finalPrice.toFixed(2);
+    document.getElementById("amountToBePaid").value = finalPriceInput.value;
+
+    console.log(basePrice);
+
+    console.log(seatCount);
+
+    console.log(finalPriceInput);
+    console.log(selectedSeats);
+}
+
+console.log(busDetails);
+
+const checkboxContainer = document.getElementById('checkboxContainer');
+
+for (const seatNumber in busDetails) {
+    if (busDetails.hasOwnProperty(seatNumber)) {
+        const holder = document.createElement('div');
+        holder.classList.add("holder");
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = seatNumber;
+        checkbox.value = seatNumber;
+        checkbox.checked = busDetails[seatNumber];
+
+        const span = document.createElement('span');
+        span.textContent = seatNumber;
+
+        if (busDetails[seatNumber]) {
+            holder.classList.add('disabled');
+        }
+
+        holder.appendChild(checkbox);
+        holder.appendChild(span);
+
+        holder.addEventListener('click', function () {
+            if (!busDetails[seatNumber]) {
+                checkbox.checked = !checkbox.checked;
+                updateSelectedSeats(seatNumber, checkbox.checked);
+                if (checkbox.checked) {
+                    holder.classList.add('selected');
+                } else {
+                    holder.classList.remove('selected');
+                }
+            }
+        });
+
+        checkboxContainer.appendChild(holder);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
     const forms = document.querySelectorAll('.needs-validation');
     const bookNowButton = document.getElementById('bookNowButton');
     const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
     const finalPriceInput = document.getElementById('finalPrice');
     Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
     });
     bookNowButton.addEventListener('click', () => {
-      const form = document.querySelector('.needs-validation');
-      if(!selectedSeats){
-    	  
-      }
-      else if (form.checkValidity()) {
-        paymentModal.show();
-      } else {
-        form.classList.add('was-validated');
-      }
+        const form = document.querySelector('.needs-validation');
+        if (!selectedSeats) {
+
+        } else if (form.checkValidity()) {
+            paymentModal.show();
+        } else {
+            form.classList.add('was-validated');
+        }
     });
     document.getElementById("payment").addEventListener('click', (e) => {
-      const form = document.querySelector('#mainForm');
-      const mock = document.getElementById('mockPaymentForm');
-      if (mock.checkValidity()) {
-        console.log("" + form);
-        form.submit();
-      } else {
-        mock.classList.add('was-validated');
-      }
+        const form = document.querySelector('#mainForm');
+        const mock = document.getElementById('mockPaymentForm');
+        if (mock.checkValidity()) {
+            console.log("" + form);
+            form.submit();
+        } else {
+            mock.classList.add('was-validated');
+        }
     });
-  });
-
+});
 </script>
-
 
 </body>
 </html>

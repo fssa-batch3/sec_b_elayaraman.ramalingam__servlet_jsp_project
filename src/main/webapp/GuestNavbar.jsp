@@ -16,9 +16,14 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
+	<style>
+		.m-80{
+		margin-top:80px !important;
+		}
+	</style>
 </head>
 <body>
-	<nav class="z-3 fixed-top w-100 navbar navbar-expand-lg navbar-light"
+	<nav class="z-3 fixed-top w-100 navbar navbar-expand-lg "
 		style="height: 80px">
 		<div class="container-fluid my-container-fluid">
 			<a class="navbar-brand fw-bold d-lg-none"

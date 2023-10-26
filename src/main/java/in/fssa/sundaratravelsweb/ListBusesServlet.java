@@ -33,7 +33,7 @@ public class ListBusesServlet extends HttpServlet {
             Date travelDate = Date.valueOf(request.getParameter("travelDate"));
 
             List<Bus> buses = busServices.getBusesByRouteIdAndDate(routeId, travelDate);
-            System.out.println(buses);
+
             List<BusDetailsDTO> busList = new ArrayList<>();
 
             for (Bus bus : buses) {

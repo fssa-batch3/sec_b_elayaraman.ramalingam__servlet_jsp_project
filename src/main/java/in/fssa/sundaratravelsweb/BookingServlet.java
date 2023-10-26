@@ -26,7 +26,6 @@ public class BookingServlet extends HttpServlet {
         List<Booking>  list = new ArrayList<>();
         try{
             list = services.getAllBookings();
-            System.out.println(list);
             
         } catch (ServicesException  e) {
             throw new RuntimeException(e);

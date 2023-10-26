@@ -19,8 +19,7 @@
 	<%
 	List<BusDetailsDTO> busList = (List<BusDetailsDTO>) request.getAttribute("busList");
 	%>
-	<h1>Bus List</h1>
-	<table border="1" class="table table-hover container">
+	<table border="1" class="table table-hover container" style="margin-top: 80px">
 		<thead>
 			<tr>
 				<th>Bus ID</th>
@@ -40,9 +39,9 @@
 						<tr>
 							<td>${busDetails.busid}</td>
 							<td>${busDetails.busNo}</td>
+							<td>${busDetails.departureTime}</td>
 							<td>${busDetails.fromLocation}</td>
 							<td>${busDetails.toLocation}</td>
-							<td>${busDetails.departureTime}</td>
 							<td>${busDetails.basePrice}</td>
 							<td>${(busDetails.availableSeats > 0 ? busDetails.availableSeats : 'no Seats available')}</td>
 							<c:if test="${busDetails.availableSeats > 0}">

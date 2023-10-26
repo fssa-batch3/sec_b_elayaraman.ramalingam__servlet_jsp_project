@@ -13,27 +13,28 @@
 	<div class="container" style="margin-top: 80px">
 		<div
 			class="input-group d-flex mt-5 input-group justify-content-center">
-			<form class="d-flex input-grouprow g-3 needs-validation
+			<form
+				class="d-flex input-grouprow g-3 needs-validation
 			justify-content-center"
 				onsubmit="fetchTicket(event)" novalidate style="width: 80%">
 				<div class="col-md-3">
-					 <input id="phonenumber" pattern="^[789]\d{9}$" type="tel"
-					class="form-control" placeholder="Phone number" required>
+					<input id="phonenumber" pattern="^[789]\d{9}$" type="tel"
+						class="form-control" placeholder="Phone number" required>
 					<div class="invalid-feedback">Please provide a valid phone
-				number.</div>
+						number.</div>
 				</div>
 				<div class="col-md-3">
-				
-				<input id="traveldate" type="date" class="form-control" required>
 
-				<div class="invalid-feedback">Enter a date</div>
+					<input id="traveldate" type="date" class="form-control" required>
+
+					<div class="invalid-feedback">Enter a date</div>
 				</div>
-				
-				
+
+
 				<button class="btn btn-primary" id="ticketButton" type="submit">Find
 					your ticket</button>
 			</form>
-			
+
 		</div>
 		<div id="ticketList"></div>
 	</div>
@@ -77,7 +78,7 @@ function listTickets(items) {
     const table = document.createElement("table");
     table.className = "table mt-5";
 
-    const headers = ["Ticket ID", "Booking ID", "Passenger Name", "Phone Number", "Total Price", "Travel Date"];
+    const headers = ["Ticket ID", "Passenger Name", "Phone Number", "Total Price", "Travel Date"];
     const headerRow = table.insertRow();
     for (const header of headers) {
         const th = document.createElement("th");
@@ -91,14 +92,12 @@ function listTickets(items) {
         const cell3 = row.insertCell(2);
         const cell4 = row.insertCell(3);
         const cell5 = row.insertCell(4);
-        const cell6 = row.insertCell(5);
 
         cell1.textContent = item.ticketId;
-        cell2.textContent = item.bookingId;
-        cell3.textContent = item.passengerName;
-        cell4.textContent = item.phoneNumber;
-        cell5.textContent = item.totalPrice;
-        cell6.textContent = item.travelDate;
+        cell2.textContent = item.passengerName;
+        cell3.textContent = item.phoneNumber;
+        cell4.textContent = item.totalPrice;
+        cell5.textContent = item.travelDate;
     }
 
     ticketListDiv.innerHTML = "";

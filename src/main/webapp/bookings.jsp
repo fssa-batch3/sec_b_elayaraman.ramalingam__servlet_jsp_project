@@ -9,7 +9,7 @@
 <jsp:include page="navbar.jsp"/>
 <% List<Booking> bookings = (List<Booking>)request.getAttribute("bookings"); %>
 
-<header>
+<header style="margin-top: 80px">
     <h1>Booking Management</h1>
     <a href="${pageContext.request.contextPath}/admin/bookings/create">
         <button class="btn btn-info btn-sm">New Booking</button>

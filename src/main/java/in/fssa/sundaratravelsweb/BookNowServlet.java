@@ -56,8 +56,6 @@ public class BookNowServlet extends HttpServlet {
 		try {
 			if (booking != null) {
 				listofTickets = bookingservices.getTicketByBookingId(booking.getId());
-				System.out.println(listofTickets);
-				System.out.println("count of tickets : "+listofTickets.size());
 				for (Ticket t : listofTickets) {
 					for (int i : t.getSeats()) {
 						listOfBookedSeats.add(i);
@@ -76,7 +74,6 @@ public class BookNowServlet extends HttpServlet {
 			}
 			seats.put(i, false);
 		}
-		System.out.println(seats);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(seats);
 
@@ -126,7 +123,6 @@ public class BookNowServlet extends HttpServlet {
 
 			String passengerName = request.getParameter("passengerName");
 			long phoneNumber = Long.parseLong(request.getParameter("phoneNumber"));
-			int[] newSeats = {};
 			BookingServices bookingService = new BookingServices();
 			int id = bookingService.bookTicket(busId, travelDate, bookedSeats, passengerName, phoneNumber, seats);
 

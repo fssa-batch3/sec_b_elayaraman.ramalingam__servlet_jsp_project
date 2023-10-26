@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+body{
+	background:#a6e1ed !important;
+}
+nav{
+	background:white !important;
+}
+#routeList{
+	background:white !Important;
+	width:70%;
+	margin:auto;
+	border-radius:12px;
+}

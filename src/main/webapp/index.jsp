@@ -4,15 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Home Page</title>
-<!-- Include Bootstrap 5 CSS -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 
+	<link rel="stylesheet" href="./assets/styles/style.css">
+
 </head>
 <style>
-body {
-	
-}
 
 .field {
 	display: flex;
@@ -25,7 +23,7 @@ form {
 	background: url("./assets/images/bus-bg.jpg");
 	background-size: cover;
 	background-position: center;
-	height: 400px;
+	height: 300px;
 }
 
 .form-container {
@@ -38,14 +36,53 @@ form {
 	backdrop-filter: blur(5px);
 }
 
+.holder{
+	display:grid;
+	grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  	gap: 10px;
+  	width:700px;
+  	justify-items:center;
+}
+
+.route{
+height:48px;
+width:350px;
+}
+
+#loader{
+width:100px;
+height:100px;
+}
+.select{
+width:100px;
+}
+
 .w-150 {
 	min-width: 250px !important;
+}
+
+#routeList{
+height: calc(100vh - 460px) !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d1cf;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d6d6c6;
 }
 </style>
 <jsp:include page="GuestNavbar.jsp" />
 <body>
-
-
 
 	<form action="${pageContext.request.contextPath}/bus/list"
 		method="post" style="margin-top: 80px">
@@ -60,7 +97,7 @@ form {
 				<input type="text" disabled name="toLocation" required
 					id="toLocation" class="form-control" autocomplete="off"
 					placeholder="to"> <input type="date" id="travelDate"
-					name="travelDate" required class="form-control"><br>
+					name="travelDate" required class="form-control"min="<%=java.time.LocalDate.now()%>" max="<%=java.time.LocalDate.now().plusDays(60)%>"><br>
 			</div>
 			</div>
 			<input name="routeId" type="hidden" id="selectedRouteId" /> <input
@@ -72,12 +109,12 @@ form {
 	</form>
 	<h3 class="fw-semibold mb-2 text-dark text-center mt-3	">Available Routes:</h3>
 	<div id="loader" class="container d-flex w-100 justify-content-center flex-column align-items-center">
-	<img src="./assets/images/loader-1.gif" class="h-25 w-25">
+	<img src="./assets/images/Dual Ring-1s-70px.svg" class="h-25 w-25">
 	<p>Fetching Locations</p>
 	</div>
-	<ul id="routeList"
+	<div id="routeList"
 		class="d-flex align-items-start justify-content-center p-0 overflow-auto">
-	</ul>
+	</div>
 	<script>
         const fromLocationInput = document.getElementById("fromLocation");
         const toLocationInput = document.getElementById("toLocation");
@@ -132,23 +169,18 @@ form {
             const filteredRoutes = routeList.filter(route => route.fromLocation.toLowerCase().startsWith(fromLocation));
 
             if (filteredRoutes.length > 0) {
-                const columns = 2;
-                const itemsPerColumn = Math.ceil(filteredRoutes.length / columns);
-
-                for (let i = 0; i < columns; i++) {
-                    const columnDiv = document.createElement("div");
-                    columnDiv.classList.add("col-xl-3");
-                    const columnList = document.createElement("ul");
-                    columnList.classList.add("d-flex", "flex-column", "align-items-start", "justify-content-center", "p-0","w-150");
-                    for (let j = i * itemsPerColumn; j < (i + 1) * itemsPerColumn && j < filteredRoutes.length; j++) {
+            	
+                    const columnList = document.createElement("div");
+                    columnList.classList.add("holder");
+                    for (let j = 0;  j < filteredRoutes.length; j++) {
                     	
                         const route = filteredRoutes[j];
                         const holder = document.createElement("div");
-                        holder.classList.add("d-flex","m-3");
+                        holder.classList.add("d-flex","m-3","route");
                         const item = document.createElement("p");
                         const btn = document.createElement("button");
-                        btn.textContent= "Select this route";
-                        btn.classList.add("btn","btn-light");
+                        btn.textContent= "Select";
+                        btn.classList.add("btn","btn-light","btn-sm","select");
                         item.style.textAlign = "left"; 
                         item.classList.add("text-left", "mt-2","w-150");
                         item.textContent = route.fromLocation + ' to ' + route.toLocation;
@@ -178,9 +210,7 @@ form {
                         columnList.appendChild(holder);
                     }
 
-                    columnDiv.appendChild(columnList);
-                    listDiv.appendChild(columnDiv);
-                }
+                    listDiv.appendChild(columnList);
             } else {
                 const noRoutesItem = document.createElement("p");
                 noRoutesItem.textContent = "No routes available.";
